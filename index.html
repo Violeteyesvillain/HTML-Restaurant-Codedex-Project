@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violeteyes' - Interstellar Cuisine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4a148c, #6a1b9a);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(74, 20, 140, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(156, 39, 176, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        #header-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #9c27b0;
+            object-fit: cover;
+            animation: pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+        
+        h1 {
+            margin: 8px 0 5px 0;
+            font-size: 1.8em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+        
+        header p {
+            margin: 0 0 10px 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            position: relative;
+            z-index: 2;
+        }
+        
+        nav {
+            background: rgba(156, 39, 176, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+        
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #9c27b0;
+            border-bottom: 2px solid #9c27b0;
+            padding-bottom: 10px;
+        }
+        
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        article {
+            width: 30%;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        article img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        h3 {
+            color: #4a148c;
+            margin: 10px 0;
+        }
+        
+        i {
+            color: #9c27b0;
+            font-weight: bold;
+        }
+        
+        /* Order Form Section - Dark Theme */
+        #order-form {
+            background: linear-gradient(135deg, #4a148c, #6a1b9a);
+            margin: 0 -20px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(74, 20, 140, 0.3);
+        }
+        
+        #order-form h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group > label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        /* Checkbox and Radio Groups */
+        .form-group div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 5px 0;
+        }
+        
+        .form-group div label {
+            color: rgba(255, 255, 255, 0.9);
+            margin-left: 10px;
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #e1bee7;
+        }
+        
+        input[type="number"], textarea, select {
+            width: 90%;
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="number"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #e1bee7;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(225, 190, 231, 0.3);
+        }
+        
+        input[type="number"]::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        input[type="submit"] {
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            grid-column: span 2;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+        
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
+            background: linear-gradient(45deg, #c2185b, #7b1fa2);
+        }
+        
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            grid-column: span 2;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #7b1fa2;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4a148c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img id="header-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Galactic Bites Restaurant">
+        <h1>Violeteyes' - Interstellar Cuisine</h1>
+        <p>Interstellar Cuisine from Across the Universe</p>
+        <nav>
+            <a href="#menu">Menu</a>
+            <a href="#order-form">Place Your Order</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <article>
+                    <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Nebula Burger">
+                    <h3>Nebula Burger</h3>
+                    <p>A cosmic blend of Angus beef with meteorite spices, served on a black hole bun with stellar sauce. <i>$12.99</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Quantum Pizza">
+                    <h3>Quantum Pizza</h3>
+                    <p>Simultaneously all toppings and no toppings until observed. Choose your own toppings! <i>$14.99-$18.99</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Warp Speed Wrap">
+                    <h3>Warp Speed Wrap</h3>
+                    <p>Faster-than-light nutrition with grilled chicken, alien greens, and plasma dressing. <i>$10.99</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Supernova Salad">
+                    <h3>Supernova Salad</h3>
+                    <p>An explosive mix of greens, cosmic croutons, and a big bang of flavors. <i>$9.99</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Milkshake from Mars">
+                    <h3>Milkshake from Mars</h3>
+                    <p>Red planet berries blended with ice cream for an out-of-this-world treat. <i>$6.99</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Dark Matter Donuts">
+                    <h3>Dark Matter Donuts</h3>
+                    <p>Gravitational pull so strong you can't eat just one. Assorted flavors. <i>$5.99</i></p>
+                </article>
+            </div>
+        </section>
+        
+        <section id="order-form">
+            <h2>Place Your Order</h2>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="nebula-burger">Nebula Burger:</label>
+                    <input type="number" id="nebula-burger" name="nebula-burger" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantum-pizza">Quantum Pizza:</label>
+                    <input type="number" id="quantum-pizza" name="quantum-pizza" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="warp-wrap">Warp Speed Wrap:</label>
+                    <input type="number" id="warp-wrap" name="warp-wrap" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="supernova-salad">Supernova Salad:</label>
+                    <input type="number" id="supernova-salad" name="supernova-salad" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mars-milkshake">Milkshake from Mars:</label>
+                    <input type="number" id="mars-milkshake" name="mars-milkshake" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dark-donuts">Dark Matter Donuts:</label>
+                    <input type="number" id="dark-donuts" name="dark-donuts" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label>Sides (select up to 3):</label>
+                    <div>
+                        <input type="checkbox" id="side1" name="sides" value="moon-fries">
+                        <label for="side1">Moon Fries</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="side2" name="sides" value="space-rings">
+                        <label for="side2">Space Onion Rings</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="side3" name="sides" value="astro-salad">
+                        <label for="side3">Astro Side Salad</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Delivery Method:</label>
+                    <div>
+                        <input type="radio" id="delivery1" name="delivery" value="pickup" checked>
+                        <label for="delivery1">Teleportation Pickup</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="delivery2" name="delivery" value="drone">
+                        <label for="delivery2">Drone Delivery (+$5.99)</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="delivery3" name="delivery" value="rocket">
+                        <label for="delivery3">Rocket Ship Delivery (+$15.99)</label>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="special-requests">Special Requests (warp speed instructions, dietary restrictions, etc.):</label>
+                    <textarea id="special-requests" name="special-requests" rows="4"></textarea>
+                </div>
+                
+                <input type="submit" value="Go To Checkout">
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Made with love by Violeteyes</p>
+    </footer>
+</body>
+</html>
+
+<!-- To be transparent, this project isn't entirely my own — it’s a collaborative effort with support from AI tools. That said, I've gained valuable insights from the course. I also realized that frontend development may not be my strongest suit. -->
